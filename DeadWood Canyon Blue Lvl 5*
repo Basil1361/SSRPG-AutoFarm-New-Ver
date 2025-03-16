@@ -7,10 +7,6 @@ func DeadwoodBlueLvl5()
         equipL Vigor Sword
         equipR Poison War Hammer
     :? foe ! boss
-      ? foe = mosquito
-        equipL Ice Wand 
-        equipR Ether Wand
-      : 
         equipL Vigor Sword
         equipR Poison War Hammer
 
