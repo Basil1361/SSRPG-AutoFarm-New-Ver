@@ -1,0 +1,18 @@
+func CavesBlueLvl5()
+  ? loc = Caves
+    ? hp < 7
+      activate potion
+    ? foe = boss & hp > 0
+      ?foe.state = 133
+      ^&item.GetCooldown(＂mind＂) <= 0 
+        equipL mind Stone 
+      : 
+        equipL ice wand
+        equipR ether wand
+                
+    :? foe ! boss
+        equipL Vigor Sword
+        equipR Poison War Hammer
+
+    ? pickup.distance < 10
+      equip star
