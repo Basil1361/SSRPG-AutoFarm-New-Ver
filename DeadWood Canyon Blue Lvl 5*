@@ -1,5 +1,7 @@
 func DeadwoodBlueLvl5()
   ? loc = Deadwood  
+    ? hp < 7
+      activate potion
     ? foe = boss
       ?foe.distance >= 7
         equip dashing shield
