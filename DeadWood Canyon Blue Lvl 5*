@@ -1,0 +1,27 @@
+func DeadwoodBlueLvl5()
+  ? loc = Deadwood  
+    ? foe = boss
+      ?foe.distance >= 7
+        equip dashing shield
+      :
+        equipL Vigor Sword
+        equipR Poison War Hammer
+    :? foe ! boss
+      ? foe = mosquito
+        equipL Ice Wand 
+        equipR Ether Wand
+      : 
+        equipL Vigor Sword
+        equipR Poison War Hammer
+
+    ? harvest.distance < 5
+      equip hatchet
+      activate hatchet
+
+    ? pickup.distance < 10
+      equip star
+
+
+
+    
+DeadwoodBlueLvl5()
