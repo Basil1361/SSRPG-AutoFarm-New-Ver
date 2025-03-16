@@ -19,6 +19,7 @@ func DeadwoodBlueLvl5()
     ? pickup.distance < 10
       equip star
 
+DeadwoodBlueLvl5()
 
 
     
