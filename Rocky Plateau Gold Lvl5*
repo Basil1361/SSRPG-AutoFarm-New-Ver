@@ -1,0 +1,51 @@
+func RockyGoldLvl5()
+  ? loc = Rocky  
+    ? hp < 7
+      activate potion
+    ? foe = Acronian Scout
+      equipL Vigor Sword
+      equipR Poison Hammer
+    ? foe = ＂phase1＂
+     ?foe.distance >= 7
+       equip dashing shield
+     :
+       equipL Vigor Sword
+       equipR Poison Hammer
+
+    :? foe = ＂phase2＂
+      ?foe.distance >= 7
+        equip dashing shield
+      :?foe = ＂fire＂
+          equipL Vigor Sword
+          equipR ether wand
+      :?foe = ＂ether＂
+          equipL Vigor Sword
+          equipR Poison WarHammer
+      :?foe = ＂ice＂
+          equipL vigor Sword
+          equipR Fire Hammer
+      :?foe = ＂vigor＂
+          equipL Vigor Sword  
+          equipR Poison Hammer
+      :?foe = ＂poison＂
+          equipL Vigor Sword
+          equipR Ice Wand
+    :? foe = ＂phase3＂
+      ?foe.distance >= 7
+        equip dashing shield
+      :? foe.state = 115 
+      ^& foe.time >= 65
+      ^&item.GetCooldown(＂mind＂) <= 0 
+        equipL mind Stone
+      :
+       equipL = vigor sword
+       equipR = Poison Hammer
+
+    ? harvest.distance < 5
+      equip shovel
+      activate shovel
+
+    ? pickup.distance < 10
+      equip star
+
+RockyGoldLvl5()
