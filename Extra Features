@@ -1,0 +1,8 @@
+import UI/MindstoneButton
+>`0,0,Current time =
+^ @time.FormatCasual(totaltime, true)@
+>`0,1,State is: @foe.state@ Time is: @foe.time@
+>`0,2,Best Time =
+^ @time.FormatCasual(loc.besttime)@
+>`0,3,Average time =
+^ @time.FormatCasual(loc.averagetime)@
