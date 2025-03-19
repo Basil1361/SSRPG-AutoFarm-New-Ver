@@ -1,8 +1,18 @@
 import UI/MindstoneButton
->`0,0,Current time =
+import Pets/CatBalloon
+import Pets/Snowman
+import Cosmetics/WavyScarf
+import Hats/SantaHat
+import Foes/PallasCrown
+
+
+
+
+>`0,21,Current time =
 ^ @time.FormatCasual(totaltime, true)@
->`0,1,State is: @foe.state@ Time is: @foe.time@
->`0,2,Best Time =
+>`0,22,State is: @foe.state@ Time is: @foe.time@
+>`0,23,Best Time =
 ^ @time.FormatCasual(loc.besttime)@
->`0,3,Average time =
+>`0,24,Average time =
 ^ @time.FormatCasual(loc.averagetime)@
+    
