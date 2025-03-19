@@ -1,0 +1,21 @@
+func DeadWoodMission()
+  ?foe = Huge Mosquito | foe = Stone Scrab
+    equipL Vigor Sword
+    equipR Towering Shield
+
+  ? pickup.distance < 10
+    equip star
+
+  ? foe = boss
+    ?foe.distance <= 7
+      ?item.GetCooldown(＂bardiche＂)  <= 0 
+      ^|(item.right = ＂bardiche＂
+      ^& item.right.state = 2)
+        equip bardiche
+        activate bardiche
+      :
+        equip skeleton arm
+        activate R
+  
+
+DeadWoodMission()
