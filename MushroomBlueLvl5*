@@ -39,8 +39,10 @@ func MushroomBlueLvl5()
        equipL vigor sword *7 + 13
        equipR poison hammer * 8 + 11
                 
-    :? foe ! boss
-      ? foe.count >= 25
+    :? foe = Snail | foe = Huge Snail 
+      ^| foe = Ant | foe = Ant Hill 
+      ^| foe = ＂Big A** Snail＂
+      ? foe.count >= 20
       ^&item.GetCooldown(＂blade＂) <= 0
         equip blade 
         activate blade
@@ -50,5 +52,3 @@ func MushroomBlueLvl5()
 
     ? pickup.distance < 10
       equip star
-
-MushroomBlueLvl5()
