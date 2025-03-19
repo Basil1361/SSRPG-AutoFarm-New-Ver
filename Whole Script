@@ -141,6 +141,7 @@ func DeadwoodBlueLvl5()
 
    ?foe = ＂Xylo＂  
      ?foe.distance >= 7
+       equipL vigor sword
        equip dashing shield
      :?item.GetCooldown(＂mask＂) <= 0 
         equipR mask
@@ -162,16 +163,15 @@ func DeadwoodBlueLvl5()
         activate blade
       : 
         equipL Poison Hammer
-        equipR Vigor Sword
+        equipR Vigor Hammer
 
-    
+    /*
     ? harvest.distance < 5
       equip hatchet
-      activate hatchet
+      activate hatchet */
 
     ? pickup.distance < 10
       equip star
-
 
 func CavesBlueLvl5()
   ? loc = Caves 
@@ -253,7 +253,7 @@ func MushroomBlueLvl5()
 
     ? pickup.distance < 10
       equip star
-  
+
 func HauntedHallsBlueLvl5()
   ? loc = Haunted Halls
     ? hp < 7
@@ -357,10 +357,9 @@ func IcyRidgeBlueLvl1()
     ? pickup.distance < 10
         equip star
 
-   ? foe = boss 
+   ? foe = Hrímnir
      equipL ice wand
-       equipR ether wand
-
+     equipR ether wand
 
 func TempleBlueLvl1()
   ? loc = Temple
@@ -381,7 +380,6 @@ func TempleBlueLvl1()
       equipR Poison Hammer
 
   ? foe = ＂Nagaraja＂
-     
      ?foe.distance >= 7
        equip dashing shield
      :?item.GetCooldown(＂bardiche＂)  <= 0 
@@ -397,18 +395,12 @@ func TempleBlueLvl1()
        ^&foe.time >= 57.5
          equipL mind Stone
 
-
-
-
 import UI/MindstoneButton
 import Pets/CatBalloon
 import Pets/Snowman
 import Cosmetics/WavyScarf
 import Hats/SantaHat
 import Foes/PallasCrown
-
-
-
 
 >`0,21,Current time =
 ^ @time.FormatCasual(totaltime, true)@
@@ -417,13 +409,12 @@ import Foes/PallasCrown
 ^ @time.FormatCasual(loc.besttime)@
 >`0,24,Average time =
 ^ @time.FormatCasual(loc.averagetime)@
-    
-RockyGoldLvl1()
+
 DeadwoodBlueLvl5()
+RockyGoldLvl1()
 CavesBlueLvl5()
 MushroomBlueLvl5()
 HauntedHallsBlueLvl5()
 BoilingMineLvl5()
-TempleBlueLvl1()
 IcyRidgeBlueLvl1()
-
+TempleBlueLvl1()
