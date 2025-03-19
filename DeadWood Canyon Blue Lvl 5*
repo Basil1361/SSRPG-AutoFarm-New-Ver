@@ -33,14 +33,14 @@ func DeadwoodBlueLvl5()
        equipR poison hammer * 8 + 11
       
 
-    :? foe ! boss
-      ? foe.count >= 30
+    :? foe = Huge Mosquito | foe = Stone Scrab
+      ? foe.count >= 20
       ^&item.GetCooldown(＂blade＂) <= 0
         equip blade 
         activate blade
-      :
-        equipL Vigor Sword
-        equipR Poison War Hammer
+      : 
+        equipL Poison Hammer
+        equipR Vigor Hammer
 
     
     ? harvest.distance < 5
@@ -49,5 +49,3 @@ func DeadwoodBlueLvl5()
 
     ? pickup.distance < 10
       equip star
-
- DeadwoodBlueLvl5()
