@@ -10,8 +10,10 @@ func CavesBlueLvl5()
         equipL ice wand
         equipR ether wand
                 
-    :? foe ! boss
-      ? foe.count >= 30
+    ? foe = Neck Warmer | foe = Skin Peeler
+    ^| foe = Wound Licker | foe = Nail Biter
+    ^| foe = Knee Chopper | foe = Not Cavier 
+      ? foe.count >= 20
       ^&item.GetCooldown(＂blade＂) <= 0
         equip blade 
         activate blade
@@ -19,4 +21,5 @@ func CavesBlueLvl5()
         equipL Vigor Sword
         equipR Poison War Hammer
 
-CavesBlueLvl5()
+    ? pickup.distance < 10
+      equip star
