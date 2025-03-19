@@ -36,8 +36,8 @@ func RockyGoldLvl1()
       ?foe.distance >= 7
          equip dashing shield
       :?item.GetCooldown(＂mask＂) <= 0 
-        equipR mask
-        activate mask
+         equipR mask
+         activate mask
      :?item.GetCooldown(＂bardiche＂)  <= 0 
      ^|(item.right = ＂bardiche＂
      ^& item.right.state = 2)
@@ -59,16 +59,28 @@ func RockyGoldLvl1()
       :?foe = ＂poison＂
           equipL Vigor Sword
           equipR Ice Wand
+
     :? foe = ＂phase3＂
       ?foe.distance >= 7
-        equip bashing shield
-      :? foe.state = 115 
+        equip dashing shield
+      :?item.GetCooldown(＂mask＂) <= 0 
+        equipR mask
+        activate mask
+     :?item.GetCooldown(＂bardiche＂)  <= 0 
+     ^|(item.right = ＂bardiche＂
+     ^& item.right.state = 2)
+       equip bardiche
+       activate R
+
+     :? foe.state = 115 
       ^& foe.time >= 65
       ^&item.GetCooldown(＂mind＂) <= 0 
         equipL mind Stone
-      :
-       equipL = vigor sword
-       equipR = Poison Hammer
+      
+     :
+       equipL vigor sword *7 + 13
+       equipR poison hammer * 8 + 11
+
 
     ? harvest.distance < 5
       equip shovel
