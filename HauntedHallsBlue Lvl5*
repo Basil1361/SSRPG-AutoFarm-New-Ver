@@ -1,0 +1,40 @@
+func HauntedHallsBlueLvl5()
+  ? loc = Haunted Halls
+    ? hp < 7
+      activate potion
+    ? foe = ＂Pallas＂
+      ?foe.state = 1
+        equipL ice wand
+        equipR ether wand
+
+
+      :? foe.state = 33
+        ?item.GetCooldown(＂mind＂) <= 0
+          equipL mind Stone 
+        : 
+          equipL ice wand
+          equipR ether wand
+
+      :?foe.state = 0 | foe.state = 2
+        ?foe.distance >= 7
+          equip dashing shield
+        :?item.GetCooldown(＂mask＂) <= 0 
+          equipR mask
+          activate mask
+       :?item.GetCooldown(＂bardiche＂)  <= 0 
+       ^|(item.right = ＂bardiche＂
+       ^& item.right.state = 2)
+         equip bardiche
+         activate R
+       :
+         equipL vigor sword *7 + 13
+         equipR poison hammer * 8 + 11
+        
+    :? foe ! boss
+      ? foe.count >= 15
+      ^&item.GetCooldown(＂blade＂) <= 0
+        equip blade 
+        activate blade
+      :
+        equipL Ice Wand
+        equipR Ether Wand
