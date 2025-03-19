@@ -30,7 +30,9 @@ func HauntedHallsBlueLvl5()
          equipL vigor sword *7 + 13
          equipR poison hammer * 8 + 11
         
-    :? foe ! boss
+    ?foe = skeletimmy  | foe = Skeletony
+   ^| foe = Booo | foe = Big Booo 
+   ^| foe = ＂R.I.P.＂
       ? foe.count >= 15
       ^&item.GetCooldown(＂blade＂) <= 0
         equip blade 
