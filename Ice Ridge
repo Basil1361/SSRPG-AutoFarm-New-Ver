@@ -1,0 +1,20 @@
+func IcyRidgeBlueLvl1()
+   ? loc = Icy Ridge
+      ? hp < 20
+        activate potion
+
+   ? foe = Ki Eater  | foe = Ki Gobbler
+   ^| foe = Ki Slurper | foe = Ice Elemental
+      ? foe.count >= 20
+      ^&item.GetCooldown(＂blade＂) <= 0
+        equip blade 
+        activate blade
+      :
+        equip vigor crossbow
+
+    ? pickup.distance < 10
+        equip star
+
+   ? foe = boss 
+     equipL ice wand
+       equipR ether wand
