@@ -3,8 +3,10 @@ func BoilingMineLvl5()
       ? hp < 7
         activate potion
 
-   ? foe ! boss
-      ? foe.count >= 15
+   ? foe = Mine Walker  | foe = Dominotaur
+   ^| foe = fire elemental | foe = Flame Geyser
+   ^| foe = Whip Controller 
+      ? foe.count >= 20
       ^&item.GetCooldown(＂blade＂) <= 0
         equip blade 
         activate blade
