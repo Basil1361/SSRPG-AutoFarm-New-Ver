@@ -1,5 +1,5 @@
 func CavesBlueLvl5()
-  ? loc = Caves
+  ? loc = Caves 
     ? hp < 7
       activate potion
     ? foe = boss & hp > 0
@@ -11,8 +11,12 @@ func CavesBlueLvl5()
         equipR ether wand
                 
     :? foe ! boss
+      ? foe.count >= 30
+      ^&item.GetCooldown(＂blade＂) <= 0
+        equip blade 
+        activate blade
+      :
         equipL Vigor Sword
         equipR Poison War Hammer
 
-    ? pickup.distance < 10
-      equip star
+CavesBlueLvl5()
