@@ -1,6 +1,6 @@
 func DeadwoodBlueLvl5()
   ? loc = Deadwood  
-    ? hp < 7
+    ? hp < 5
       activate potion
     ? foe = ＂Poena＂
       ?foe.distance >= 7
@@ -19,6 +19,7 @@ func DeadwoodBlueLvl5()
 
    ?foe = ＂Xylo＂  
      ?foe.distance >= 7
+       equipL vigor sword
        equip dashing shield
      :?item.GetCooldown(＂mask＂) <= 0 
         equipR mask
@@ -31,6 +32,7 @@ func DeadwoodBlueLvl5()
      :
        equipL vigor sword *7 + 13
        equipR poison hammer * 8 + 11
+
       
 
     :? foe = Huge Mosquito | foe = Stone Scrab
@@ -39,13 +41,13 @@ func DeadwoodBlueLvl5()
         equip blade 
         activate blade
       : 
-        equipL Poison Hammer
-        equipR Vigor Hammer
+        equipR Vigor Sword
+        equip Grap
 
     
     ? harvest.distance < 5
       equip hatchet
-      activate hatchet
+      activate hatchet 
 
     ? pickup.distance < 10
       equip star
