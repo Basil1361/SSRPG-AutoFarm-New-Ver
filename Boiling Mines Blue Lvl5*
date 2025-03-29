@@ -11,15 +11,14 @@ func BoilingMineLvl5()
         equip blade 
         activate blade
       :
-        equip vigor crossbow
+        equip fire crossbow
 
-    ? pickup.distance < 10
-        equip star
+   ? pickup.distance < 10
+     equip star
 
    ? foe = ＂Bronze Guardian＂
      ?foe.state = 2 | foe.state = 1
-       equipL = ice wand
-       equipR = ether wand
+       equip = repeating  crossbow
 
      :?foe.state = 32
        ^&item.GetCooldown(＂mind＂) <= 0 
