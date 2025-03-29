@@ -1,5 +1,8 @@
 func RockyGoldLvl1()
   ? loc = Rocky  
+    ?summon.count=0
+      equipL fire_talisman
+      activate L
     ? hp < 7
       activate potion
     ? foe = ＂Acronian Scout＂
@@ -51,8 +54,7 @@ func RockyGoldLvl1()
           equipL Vigor Sword
           equipR Poison WarHammer
       :?foe = ＂ice＂
-          equipL vigor Sword
-          equipR Fire Hammer
+          equip Fire Crossbow
       :?foe = ＂vigor＂
           equipL Vigor Sword  
           equipR Poison Hammer
@@ -61,7 +63,7 @@ func RockyGoldLvl1()
           equipR Ice Wand
 
     :? foe = ＂phase3＂
-      ?foe.distance >= 7
+      ?foe.distance >= 10
         equip dashing shield
       :?item.GetCooldown(＂mask＂) <= 0 
         equipR mask
@@ -81,13 +83,12 @@ func RockyGoldLvl1()
        equipL vigor sword *7 + 13
        equipR poison hammer * 8 + 11
 
-
+/*
     ? harvest.distance < 5
       equip shovel
-      activate shovel
+      activate shovel 
+*/
 
 
     ? pickup.distance < 10
       equip star
-
-RockyGoldLvl1()
