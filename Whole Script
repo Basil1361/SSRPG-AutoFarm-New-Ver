@@ -1,3 +1,32 @@
+func isEquippedTwoHanded()
+  return !item.left
+
+func CheckForAAC()
+  ?!ai.enabled
+    return
+
+  var isTwoHanded = isEquippedTwoHanded()
+  var leftItem = item.left
+  var rightItem = item.right
+  
+  ?item.right.state = 3
+    equipR shield *0 +0
+  ?item.left.state = 3
+    equipL wand *0 +0
+  
+  ?isTwoHanded
+    ?rightItem
+      equip @rightItem@
+    :?leftItem
+      equip @leftItem@
+  :
+    ?rightItem
+      equipR @rightItem@
+    ?leftItem
+      equipL @leftItem@
+
+CheckForAAC()
+
 func RockyGoldLvl1()
   ? loc = Rocky  
     ?summon.count=0
@@ -83,12 +112,326 @@ func RockyGoldLvl1()
        equipL vigor sword *7 + 13
        equipR poison hammer * 8 + 11
 
-
     ? harvest.distance < 5
       equip shovel
       activate shovel 
 
+    ? pickup.distance < 10
+      equip star
 
+
+func DeadwoodBlueLvl5()
+  ? loc = Deadwood  
+    ? hp < 5
+      activate potion
+    ? foe = ＂Poena＂
+      ?foe.distance >= 7
+         equip dashing shield
+      :?item.GetCooldown(＂mask＂) <= 0 
+        equipR mask
+        activate mask
+     :?item.GetCooldown(＂bardiche＂)  <= 0 
+     ^|(item.right = ＂bardiche＂
+     ^& item.right.state = 2)
+       equip bardiche
+       activate R
+     :
+       equipL vigor sword *7 + 13
+       equipR poison hammer * 8 + 11
+
+   ?foe = ＂Xylo＂  
+     ?foe.distance >= 7
+       equipL vigor sword
+       equip dashing shield
+     :?item.GetCooldown(＂mask＂) <= 0 
+        equipR mask
+        activate mask
+     :?item.GetCooldown(＂bardiche＂)  <= 0 
+     ^|(item.right = ＂bardiche＂
+     ^& item.right.state = 2)
+       equip bardiche
+       activate R
+     :
+       equipL vigor sword *7 + 13
+       equipR poison hammer * 8 + 11
+
+      
+
+    :? foe = Huge Mosquito | foe = Stone Scrab
+      ? foe.count >= 20
+      ^&item.GetCooldown(＂blade＂) <= 0
+        equip blade 
+        activate blade
+      : 
+        equipR Vigor Sword
+        equip Grap
+
+    
+    ? harvest.distance < 5
+      equip hatchet
+      activate hatchet 
 
     ? pickup.distance < 10
       equip star
+
+func CavesBlueLvl5()
+  ? loc = Caves 
+    ? hp < 5
+      activate potion
+    ? foe = Bolesh & hp > 0
+      ?foe.state = 133
+      ^&item.GetCooldown(＂mind＂) <= 0 
+        equipL mind Stone 
+      : 
+        equipL ice wand
+        equipR ether wand
+
+    ? foe = Ceiling Decorator
+      ?foe.distance >= 7
+        equipL Vigor Sword
+        equip dashing shield
+      :?item.GetCooldown(＂mask＂) <= 0 
+        equipR mask
+        activate mask
+     :?item.GetCooldown(＂bardiche＂)  <= 0 
+     ^|(item.right = ＂bardiche＂
+     ^& item.right.state = 2)
+       equip bardiche
+       activate R
+     :
+       equipL vigor sword *7 + 13
+       equipR poison hammer * 8 +     
+                
+    ? foe = Neck Warmer | foe = Skin Peeler
+    ^| foe = Wound Licker | foe = Nail Biter
+    ^| foe = Knee Chopper | foe = Not Cavier 
+      ? foe.count >= 20
+      ^&item.GetCooldown(＂blade＂) <= 0
+        equip blade 
+        activate blade
+      :
+        equipL Vigor Sword
+        equipR Poison Hammer
+
+    ? pickup.distance < 10
+      equip star
+
+func MushroomBlueLvl5()
+  ? loc = Mushroom
+    ? hp < 7
+      activate potion
+    ? foe = ＂Angry Shroom＂ & hp > 0
+      ?foe.state = 32 
+      ^&foe.time >= 30
+      ^&item.GetCooldown(＂mind＂) <= 0 
+        equipL mind Stone 
+      : 
+        equip repeating crossbow
+
+    ? foe = ＂Morel＂ 
+      ?item.GetCooldown(＂mask＂) <= 0 
+        equipR mask
+        activate mask
+      :?item.GetCooldown(＂bardiche＂) <= 0 
+      ^|(item.right = ＂bardiche＂
+      ^& item.right.state = 2)
+        equip bardiche
+        activate R
+     :
+       equipL vigor sword *7 + 13
+       equipR poison hammer * 8 + 11
+
+    ? foe = ＂Enoki＂ & hp > 0
+      ?foe.distance >= 7
+        equip dashing shield
+      :?item.GetCooldown(＂mask＂) <= 0 
+        equipR mask
+        activate mask
+     :?item.GetCooldown(＂bardiche＂)  <= 0 
+     ^|(item.right = ＂bardiche＂
+     ^& item.right.state = 2)
+       equip bardiche
+       activate R
+     :
+       equipL vigor sword *7 + 13
+       equipR poison hammer * 8 + 11
+                
+    ? foe = Snail | foe = Huge Snail 
+      ^| foe = Ant | foe = Ant Hill 
+      ^| foe = ＂Big A** Snail＂
+      ? foe.count >= 20
+      ^&item.GetCooldown(＂blade＂) <= 0
+        equip blade 
+        activate blade
+      :
+        equipL Vigor Sword
+        equipR Poison War Hammer
+
+    ? pickup.distance < 10
+      equip star
+
+func HauntedHallsBlueLvl5()
+  ? loc = Haunted Halls
+    ? hp < 7
+      activate potion
+    ? foe = ＂Pallas＂
+      ?foe.state = 1
+        equipL ice wand
+        equipR ether wand
+
+
+      :? foe.state = 33
+        ?item.GetCooldown(＂mind＂) <= 0
+          equipL mind Stone 
+        : 
+          equipL ice wand
+          equipR ether wand
+
+      :?foe.state = 0 | foe.state = 2
+        ?foe.distance >= 7
+          equip dashing shield
+        :?item.GetCooldown(＂mask＂) <= 0 
+          equipR mask
+          activate mask
+       :?item.GetCooldown(＂bardiche＂)  <= 0 
+       ^|(item.right = ＂bardiche＂
+       ^& item.right.state = 2)
+         equip bardiche
+         activate R
+       :
+         equipL vigor sword *7 + 13
+         equipR poison hammer * 8 + 11
+        
+    ?foe = skeletimmy  | foe = Skeletony
+   ^| foe = Booo | foe = Big Booo 
+   ^| foe = ＂R.I.P.＂
+      ? foe.count >= 15
+      ^&item.GetCooldown(＂blade＂) <= 0
+        equip blade 
+        activate blade
+      :
+        equipL Ice Wand
+        equipR Ether Wand
+
+func BoilingMineLvl5()
+   ? loc = Boiling Mine
+      ? hp < 7
+        activate potion
+
+   ? foe = Mine Walker  | foe = Dominotaur
+   ^| foe = fire elemental | foe = Flame Geyser
+   ^| foe = Whip Controller 
+      ? foe.count >= 20
+      ^&item.GetCooldown(＂blade＂) <= 0
+        equip blade 
+        activate blade
+      :
+        equip fire crossbow
+
+   ? pickup.distance < 10
+     equip star
+
+   ? foe = ＂Bronze Guardian＂
+     ?foe.state = 2 | foe.state = 1
+       equip = repeating  crossbow
+
+     :?foe.state = 32
+       ^&item.GetCooldown(＂mind＂) <= 0 
+       ^&foe.time >= 17
+         equipL mind Stone
+
+     :?foe.state = 33
+       ?foe.distance >= 7
+         equip dashing shield
+       :?item.GetCooldown(＂mask＂) <= 0 
+         equipR mask
+         activate mask
+       :?item.GetCooldown(＂bardiche＂)  <= 0 
+       ^|(item.right = ＂bardiche＂
+       ^& item.right.state = 2)
+         equip bardiche
+         activate R
+       :
+         equipL vigor sword *7 + 13
+         equipR poison hammer * 8 + 11
+
+
+func IcyRidgeBlueLvl1()
+   ? loc = Icy Ridge
+     ? hp < 5
+       activate potion
+
+   ? foe = Ki Eater  | foe = Ki Gobbler
+   ^| foe = Ki Slurper | foe = Ice Elemental
+       ? foe.count >= 20
+       ^&item.GetCooldown(＂blade＂) <= 0
+          equip blade 
+          activate blade
+       :
+          equip fire crossbow
+
+   ? foe = Hrímnir  
+     ?foe.state = 0 
+       equip fire crossbow
+     :
+       equipL ice wand
+       equipR ether wand
+    
+
+func TempleBlueLvl1()
+  ? loc = Temple
+    ? hp < 7
+      activate potion
+  ? foe = Cult Guard  | foe = Cult Sorcerer
+  ^| foe = Poison Adept | foe = Serpent Handler
+  ^| foe = Worm Rider
+  ^| foe = Cult Marksman | foe = Ground Serpent
+  ^| foe = The Bell Ringer
+  ^| foe = Toupée 
+    ^&item.GetCooldown(＂blade＂) <= 0
+    ?foe.count >= 10
+      equip blade 
+      activate blade
+    :
+      equip fire crossbow
+
+  ? foe = ＂Nagaraja＂
+     ?foe.distance >= 7
+       equipL vigor sword
+       equip dashing shield
+     :?item.GetCooldown(＂bardiche＂)  <= 0 
+     ^|(item.right = ＂bardiche＂
+     ^& item.right.state = 2)
+       equip bardiche
+       activate R
+     :
+      equip blade
+
+     ?foe.state = 112
+       ^&item.GetCooldown(＂mind＂) <= 0 
+       ^&foe.time >= 57.5
+         equipL mind Stone
+
+import UI/MindstoneButton
+import Pets/CatBalloon
+import Pets/Snowman
+import Cosmetics/WavyScarf
+import Hats/SantaHat
+import Foes/PallasCrown
+
+>`0,21,Current time =
+^ @time.FormatCasual(totaltime, true)@
+>`0,22,State is: @foe.state@ Time is: @foe.time@
+>`0,23,Best Time =
+^ @time.FormatCasual(loc.besttime)@
+>`0,24,Average time =
+^ @time.FormatCasual(loc.averagetime)@
+
+DeadwoodBlueLvl5()
+RockyGoldLvl1()
+CavesBlueLvl5()
+MushroomBlueLvl5()
+HauntedHallsBlueLvl5()
+BoilingMineLvl5()
+IcyRidgeBlueLvl1()
+TempleBlueLvl1()
