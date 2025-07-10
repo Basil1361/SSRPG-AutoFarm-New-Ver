@@ -88,8 +88,8 @@ func RockyGoldLvl1()
       equipL Star
       equipR Tri
 
-/*
+
     ? harvest.distance < 5
       equip shovel
       activate shovel 
-*/
+
