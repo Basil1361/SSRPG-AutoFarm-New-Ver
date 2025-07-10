@@ -1,12 +1,21 @@
 func RockyGoldLvl1()
   ? loc = Rocky  
-    ?summon.count=0
-      equipL fire_talisman
-      activate L
     ? hp < 7
       activate potion
-    ? foe = ＂Acronian Scout＂
+    ? summon.count = 0 & foe.count = 0
+    ^& item.GetCooldown(＂cinderwisp＂) <= 0
+    ^& item.CanActivate()
+      equipL fire_talisman
+      activate L
+
+    :? foe.count >= 0 
+    ^& pickup.distance <= 10
+      equipL Star
+      equipR Tri
+
+    :? foe = ＂Acronian Scout＂
       ?foe.distance >= 7
+         equipL tri
          equip dashing shield
       :?item.GetCooldown(＂mask＂) <= 0 
         equipR mask
@@ -22,6 +31,7 @@ func RockyGoldLvl1()
 
     :? foe = ＂phase1＂
       ?foe.distance >= 7
+         equipL tri
          equip dashing shield
       :?item.GetCooldown(＂mask＂) <= 0 
         equipR mask
@@ -32,8 +42,8 @@ func RockyGoldLvl1()
        equip bardiche
        activate R
      :
-       equipL vigor sword *7 + 13
-       equipR poison hammer * 8 + 11
+       equipL vigor sword *9 + 13
+       equipR fire sword *9 + 13
 
     :? foe = ＂phase2＂
       ?foe.distance >= 7
@@ -48,47 +58,38 @@ func RockyGoldLvl1()
        activate R
 
       :?foe = ＂fire＂
-          equipL Vigor Sword
-          equipR ether wand
+          equip Ether Staff
       :?foe = ＂ether＂
           equipL Vigor Sword
-          equipR Poison WarHammer
+          equipR Fire Sword
       :?foe = ＂ice＂
-          equip Fire Crossbow
+          equipL Vigor Sword
+          equipR Fire Sword
       :?foe = ＂vigor＂
           equipL Vigor Sword  
           equipR Poison Hammer
       :?foe = ＂poison＂
-          equipL Vigor Sword
-          equipR Ice Wand
+          equip Ice Staff
 
     :? foe = ＂phase3＂
       ?foe.distance >= 10
         equip dashing shield
-      :?item.GetCooldown(＂mask＂) <= 0 
-        equipR mask
-        activate mask
-     :?item.GetCooldown(＂bardiche＂)  <= 0 
-     ^|(item.right = ＂bardiche＂
-     ^& item.right.state = 2)
-       equip bardiche
-       activate R
 
      :? foe.state = 115 
-      ^& foe.time >= 65
+      ^& foe.time >= 70
       ^&item.GetCooldown(＂mind＂) <= 0 
         equipL mind Stone
       
      :
-       equipL vigor sword *7 + 13
-       equipR poison hammer * 8 + 11
+       equipL vigor sword 
+       equipR fire sword
+
+    :
+      equipL Star
+      equipR Tri
 
 /*
     ? harvest.distance < 5
       equip shovel
       activate shovel 
 */
-
-
-    ? pickup.distance < 10
-      equip star
