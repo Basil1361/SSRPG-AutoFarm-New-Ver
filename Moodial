@@ -1,0 +1,21 @@
+var moondialTimer = 0
+?foe.distance > 7
+  moondialTimer = 0
+
+func Moonjuggle(item1, item2)
+  ? moondialTimer % 4 = 0
+    equipL @item2@
+    equipR @item1@
+
+  :?moondialTimer % 4 = 1
+    equipL moon
+    equipR @item1@
+
+  :?moondialTimer % 4 = 2
+    equipL @item1@
+    equipR @item2@
+
+  :? moondialTimer % 4 = 3
+    equipL moon
+    equipR @item2@
+  moondialTimer++
