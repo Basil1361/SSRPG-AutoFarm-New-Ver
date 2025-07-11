@@ -1,22 +1,32 @@
 func BoilingMineLvl5()
-   ? loc = Boiling Mine
-      ? hp < 7
-        activate potion
+  ? loc = Boiling Mine   
+    ? summon.count = 0 & foe.count = 0
+    ^& item.GetCooldown(＂cinderwisp＂) <= 0
+    ^& item.CanActivate()
+      equipL fire_talisman
+      activate L
 
-   ? foe = Mine Walker  | foe = Dominotaur
-   ^| foe = fire elemental | foe = Flame Geyser
-   ^| foe = Whip Controller 
-      ? foe.count >= 20
+    :? foe.count >= 0 
+    ^& pickup.distance <= 10
+      equipL Star
+      equipR Tri
+
+    :? foe = Mine Walker  | foe = Dominotaur
+    ^| foe = fire elemental | foe = Flame Geyser
+    ^| foe = Whip Controller 
+      ? foe.count >= 16
       ^&item.GetCooldown(＂blade＂) <= 0
         equip blade 
         activate blade
+      ? foe.distance <= 25
+        equip repeating
+      ? foe.count > 0 & foe.distance <= 35
+        activate potion
       :
-        equip fire crossbow
+        equip dashing shield
+        equipL tri
 
-   ? pickup.distance < 10
-     equip star
-
-   ? foe = ＂Bronze Guardian＂
+   :? foe = ＂Bronze Guardian＂
      ?foe.state = 2 | foe.state = 1
        equip = repeating  crossbow
 
@@ -27,6 +37,7 @@ func BoilingMineLvl5()
 
      :?foe.state = 33
        ?foe.distance >= 7
+         equipL tri
          equip dashing shield
        :?item.GetCooldown(＂mask＂) <= 0 
          equipR mask
@@ -39,3 +50,6 @@ func BoilingMineLvl5()
        :
          equipL vigor sword *7 + 13
          equipR poison hammer * 8 + 11
+    : 
+      equip dashing shield
+      equipL tri
