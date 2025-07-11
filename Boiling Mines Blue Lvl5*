@@ -1,4 +1,5 @@
-func BoilingMineLvl5()
+
+func BoilingMineGoldLvl3()
   ? loc = Boiling Mine   
     ? summon.count = 0 & foe.count = 0
     ^& item.GetCooldown(＂cinderwisp＂) <= 0
@@ -26,14 +27,22 @@ func BoilingMineLvl5()
         equip dashing shield
         equipL tri
 
+   :? foe = ＂Bomb Cart＂ & foe.distance <= 25
+     equip repeating crossbow
+     ? foe.distance <= 10
+     ^&item.GetCooldown(＂mind＂) <= 0
+       equipL mind Stone
+
    :? foe = ＂Bronze Guardian＂
      ?foe.state = 2 | foe.state = 1
-       equip = repeating  crossbow
+       equip repeating  crossbow
+
 
      :?foe.state = 32
        ^&item.GetCooldown(＂mind＂) <= 0 
        ^&foe.time >= 17
          equipL mind Stone
+         equipR tri
 
      :?foe.state = 33
        ?foe.distance >= 7
@@ -48,8 +57,7 @@ func BoilingMineLvl5()
          equip bardiche
          activate R
        :
-         equipL vigor sword *7 + 13
-         equipR poison hammer * 8 + 11
+         equip repeating
     : 
       equip dashing shield
       equipL tri
