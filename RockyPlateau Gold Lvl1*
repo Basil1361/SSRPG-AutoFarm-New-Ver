@@ -42,8 +42,7 @@ func RockyGoldLvl1()
        equip bardiche
        activate R
      :
-       equipL vigor sword *9 + 13
-       equipR fire sword *9 + 13
+       equip repeating crossbow
 
     :? foe = ＂phase2＂
       ?foe.distance >= 7
@@ -79,17 +78,27 @@ func RockyGoldLvl1()
       ^& foe.time >= 70
       ^&item.GetCooldown(＂mind＂) <= 0 
         equipL mind Stone
-      
+
+      :? foe.buffs.string = ＂fire＂
+        equipR vigor sword
+        equipL poison hammer 
+
+      :? foe.buffs.string = ＂vigor＂
+        ? hp > 45
+          equip repeating crossbow
+        : 
+          equipR vigor sword
+          equipL fire sword
      :
        equipL vigor sword 
        equipR fire sword
 
     :
-      equipL Star
-      equipR Tri
+      equipL Tri
+      equip Dashing Shield
 
-
+/*
     ? harvest.distance < 5
       equip shovel
       activate shovel 
-
+*/
