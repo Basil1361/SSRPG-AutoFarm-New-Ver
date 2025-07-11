@@ -1,5 +1,4 @@
-
-func BoilingMineGoldLvl3()
+func BoilingMineLvl5()
   ? loc = Boiling Mine   
     ? summon.count = 0 & foe.count = 0
     ^& item.GetCooldown(＂cinderwisp＂) <= 0
@@ -34,8 +33,11 @@ func BoilingMineGoldLvl3()
        equipL mind Stone
 
    :? foe = ＂Bronze Guardian＂
-     ?foe.state = 2 | foe.state = 1
-       equip repeating  crossbow
+     ?foe.state = 2 | foe.state = 1 
+       equip repeating crossbow
+
+     :? foe.state = 33 & foe.time >= 150
+       equip repeating crossbow
 
 
      :?foe.state = 32
@@ -56,6 +58,10 @@ func BoilingMineGoldLvl3()
        ^& item.right.state = 2)
          equip bardiche
          activate R
+       :? hp < 80
+         equipL fire sword
+         equipR sword vigor
+        
        :
          equip repeating
     : 
