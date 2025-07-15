@@ -14,14 +14,15 @@ func BoilingMineLvl5()
     :? foe = Mine Walker  | foe = Dominotaur
     ^| foe = fire elemental | foe = Flame Geyser
     ^| foe = Whip Controller 
-      ? foe.count >= 16
+      ? foe.count > 15
       ^&item.GetCooldown(＂blade＂) <= 0
         equip blade 
         activate blade
       ? foe.distance <= 25
         equip repeating
+
       ? foe.count > 0 & foe.distance <= 35
-        activate potion
+        activate potion 
       :
         equip dashing shield
         equipL tri
@@ -33,6 +34,11 @@ func BoilingMineLvl5()
        equipL mind Stone
 
    :? foe = ＂Bronze Guardian＂
+
+    /* ? summon.GetId() = cinderwisp &
+     ^summon.GetVar(＂ignition＂) >= 6
+       activate cinderwisp */
+
      ?foe.state = 2 | foe.state = 1 
        equip repeating crossbow
 
@@ -58,9 +64,9 @@ func BoilingMineLvl5()
        ^& item.right.state = 2)
          equip bardiche
          activate R
-       :? hp < 80
+       :? hp < maxhp
          equipL fire sword
-         equipR sword vigor
+         equipR sword vigor 
         
        :
          equip repeating
