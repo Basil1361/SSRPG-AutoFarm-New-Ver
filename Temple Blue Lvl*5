@@ -1,0 +1,62 @@
+func TempleBlueLvl5()
+  ? loc = Temple
+    ? summon.count = 0 & foe.count = 0
+    ^& item.GetCooldown(＂cinderwisp＂) <= 0
+    ^& item.CanActivate()
+      equipL fire_talisman
+      activate L
+
+    :? foe.count >= 0 
+    ^& pickup.distance <= 10
+      equipL Star
+      equipR Tri
+
+    :? foe = Cult Guard  
+    ^| foe = Cult Sorcerer
+    ^| foe = Poison Adept 
+    ^| foe = Serpent Handler
+    ^| foe = Worm Rider
+    ^| foe = Cult Marksman 
+    ^| foe = Ground Serpent
+    ^| foe = The Bell Ringer
+    ^| foe = Toupée 
+      ? foe.count >= 10
+      ^&item.GetCooldown(＂blade＂) <= 0
+      ^&item.CanActivate()
+        equip blade 
+        activate blade
+
+      ? foe.distance >= 25
+        equip shield
+        equipL tri
+      :
+        equip ice crossbow
+
+    :? foe = ＂Nagaraja＂
+      ? foe.distance >= 7
+        equip tri
+        equip dashing shield
+
+      :? debuffs.GetCount(＂debuff_duration＂)
+      ^ >= 9
+      ^& foe.state ! 112
+        equip bardiche
+
+      :? item.GetCooldown(＂bardiche＂)  <= 0 
+      ^| (item.right = ＂bardiche＂
+      ^& item.right.state = 2)
+        equip bardiche
+        activate R
+
+      :? foe.state = 112
+      ^&item.GetCooldown(＂mind＂) <= 0 
+      ^&foe.time >= 57.5
+        equipL mind Stone
+        equipR tri
+
+      :
+        equipL vigor sword
+        equipR fire sword
+    :
+      equip shield
+      equipL tri
