@@ -1,0 +1,73 @@
+func IcyRidgeBlueLvl1()
+   ? loc = Icy Ridge
+     ? hp < 5
+       activate potion
+     ? summon.count = 0 & foe.count = 0
+     ^& item.GetCooldown(＂cinderwisp＂) <= 0
+     ^& item.CanActivate()
+       equipL fire_talisman
+       activate L
+
+     :? foe.count = 0 
+     ^& pickup.distance <= 10
+       equipL Star
+       equipR Tri
+       
+     :? foe = Ki Eater | foe = Ki Gobbler
+     ^| foe = Ki Slurper | foe = Ice Elemental
+     ^| foe = Ice Pillar 
+     ^| foe = Elder Ice Elemental 
+     ^| foe = Ice Wall
+
+       ? foe.count = 0 
+         equip Compound Shield
+         equipL Triske 
+
+       :? foe.count >= 13
+       ^&item.GetCooldown(＂blade＂) <= 0
+         equip blade 
+         activate blade
+
+       :? foe.distance >= 30
+         equip compound shield
+         equipL Triske
+       :
+         equip Fire Crossbow
+
+     :? foe = boss
+       ?foe.state = 0 | foe.state = 2
+         ?foe.distance >= 10
+           equip dashing shield
+           equipL Vigor 
+         :
+           equipL Vigor Sword
+           equipR Vigor Wand
+       ?foe.state = 132 | foe.state = 1 
+       ^& foe.time >= 145 
+         ?foe.distance >= 10
+           equip dashing shield
+           equipL Vigor Sword
+         :?item.GetCooldown(＂bardiche＂) <= 0 
+         ^|(item.right = ＂bardiche＂
+         ^& item.right.state = 2)
+           equip bardiche
+           activate R
+         :
+           equipL vigor sword *9 + 13
+           equipR fire sword *9 + 13
+
+       ?foe.state = 133
+           equipL Vigor Wand
+           equip compound shield  
+       ?foe.state = 32 | foe.state = 143
+         ?foe.distance >= 10
+           equipL Vigor Sword
+           equip dashing shield 
+         :
+           equipL Vigor Sword
+           equipR Fire Sword
+     :
+        equipL tri
+        equip compound shield
+
+IcyRidgeBlueLvl1()

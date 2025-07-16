@@ -1,0 +1,7 @@
+func speed()
+  ? loc = intro | loc = shop | loc = burnout
+  ^& loc = Gate
+    equipL Tri
+    equipR star
+
+speed()

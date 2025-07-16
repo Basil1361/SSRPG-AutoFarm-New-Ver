@@ -1,0 +1,46 @@
+func HauntedHallsBlueLvl5()
+  ? loc = Haunted Halls
+    ? summon.count = 0 & foe.count = 0
+    ^& item.GetCooldown(＂aether＂) <= 0
+    ^& item.CanActivate()
+      equipL Æther_Talisman
+      activate L
+
+    :? foe = skeletimmy  | foe = Skeletony
+    ^| foe = Booo | foe = Big Booo 
+    ^| foe = ＂R.I.P.＂
+      ? foe.count >= 15
+      ^&item.GetCooldown(＂blade＂) <= 0
+        equip blade 
+        activate blade
+      :? foe.count >= 0 & foe.distance <= 25
+        equipL Vigor Wand
+        equipR Ether Wand
+      : 
+        equip Compound Shield
+        equipL tri
+
+    :? foe = ＂Pallas＂
+      ? foe.state = 1 | foe.state = 0
+        ? foe.distance >= 7
+         equipL tri
+         equip dashing shield
+        :?item.GetCooldown(＂mask＂) <= 0 
+          equipR mask
+          activate mask
+        :?item.GetCooldown(＂bardiche＂)  <= 0 
+        ^|(item.right = ＂bardiche＂
+        ^& item.right.state = 2)
+          equip bardiche
+          activate R
+        :
+          equipL Vigor Wand
+          equipR Ether Wand         
+     :
+       equipL Vigor Wand
+       equipR Ether Wand
+    : 
+      equip Compound Shield
+      equipL tri  
+
+HauntedHallsBlueLvl5()

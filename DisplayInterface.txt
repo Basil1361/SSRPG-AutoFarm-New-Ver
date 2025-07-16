@@ -1,0 +1,47 @@
+>`0,16,#green,
+^Player buffs = @buffs.string@
+
+>`0,17,#red,
+^Player debuffs = @debuffs.string@
+
+>`0,18,#white,Foe Count = @foe.count@
+
+>`0,19,#red,
+^Foe Buffs = @foe.buffs.string@
+
+>`0,20,#green,
+^Foe Nerfs = @foe.debuffs.string@
+
+>`0,21,#white,
+^State is: @foe.state@ Time is: @foe.time@
+
+>`0,22,#rainbow,Current time =
+^ @time.FormatCasual(totaltime, true)@
+
+>`0,23,#rainbow,Best Time =
+^ @time.FormatCasual(loc.besttime)@
+
+>`0,24,#rainbow,Average time =
+^ @time.FormatCasual(loc.averagetime)@
+
+var id
+id = loc.id
+>`0,15,#blue,Exploring @id@
+
+var fee = 0
+fee = fee + 1
+?fee % 4 = 0
+ fee = 0
+?fee % 4 = 1 | fee % 4 = 2
+ >o5,0,#rainbow,`ʘ´
+?fee % 4 = 3 | fee % 4 = 0
+ >o5,0,#rainbow,-ʘ-
+
+>`0,12,#rainbow, ___
+>`0,13,#rainbow,╞-∆-╡
+>`0,14,#rainbow,└———┘
+
+>`0,11,#green,
+^Distance = @foe.distance@
+
+disable npcDialog

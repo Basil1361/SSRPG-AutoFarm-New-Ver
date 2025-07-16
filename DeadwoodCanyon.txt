@@ -1,0 +1,78 @@
+func DeadwoodWhiteLvl5()
+  ? loc = Deadwood    
+    ? summon.count = 0 & foe.count = 0
+    ^& item.GetCooldown(＂cinderwisp＂) <= 0
+    ^& item.CanActivate()
+      equipL fire_talisman
+      activate L
+
+    :? foe.count >= 0 
+    ^& pickup.distance <= 10
+      equipL Star
+      equipR Tri
+
+    :? foe = Stone Scarab
+      ? foe.distance >= 10
+         equip Dashing Shield
+         equipL Triske 
+      : 
+        equipL Poison Hammer
+        equipR Vigor Sword
+
+    :? foe = Huge Mosquito 
+      ? foe.distance >= 20
+        equip Dashing Shield
+        equipL Triske 
+
+      :
+        equip repeating crossbow
+      
+
+    :? foe = Wasp 
+      equip repeating crossbow
+
+    :? foe = Xylo
+      ? foe.distance >= 10
+        equip Dashing Shield
+        equipL Triske
+      :?item.GetCooldown(＂mask＂) <= 0 
+        equipR mask
+        activate mask
+      :?item.GetCooldown(＂bardiche＂) <= 0 
+      ^|(item.right = ＂bardiche＂
+      ^& item.right.state = 2)
+        equip bardiche
+        activate R
+
+      : 
+        equipL Vigor Sword
+        equipR Fire Sword
+
+    :? foe = ＂Poena＂
+      ? foe.buffs.string = ＂poena_mirror＂
+      ^& item.GetCooldown(＂cinderwisp＂) <= 0
+      ^& item.CanActivate()
+        equipR fire_talisman
+        activate R
+
+        ? summon.count = 0
+        ^& foe.buffs.string = ＂poena_mirror＂
+          equip bar + 11
+
+      :?item.GetCooldown(＂mask＂) <= 0 
+        equipR mask
+        activate mask
+      :?item.GetCooldown(＂bardiche＂)  <= 0 
+      ^|(item.right = ＂bardiche＂
+      ^& item.right.state = 2)
+        equip bardiche
+        activate R
+     :
+       equipL vigor sword *9 + 13
+       equipR poison hammer * 9 + 11
+
+    : 
+      equip Compound Shield
+      equipL Tri
+
+DeadwoodWhiteLvl5()

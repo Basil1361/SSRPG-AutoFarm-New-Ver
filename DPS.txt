@@ -1,0 +1,56 @@
+var FPS = 30
+var MAX_RECORDED_SECONDS = 2
+var foe_prev_hp = 0
+var damage_on_frame = ［［0］,［0］］ //damage:frame
+
+var foe_hp
+var totTime
+var loc_ = loc
+var visible = loc_ ! uulaa & loc_ ! undead_crypt_intro & loc_ ! cross_bridge
+
+Main()
+func Main()
+  ?totalTime = 1
+    damage_on_frame = ［［0］,［0］］
+  foe_hp = foe.hp
+  totTime = totalTime
+  addDamageFrame(math.Max(foe_prev_hp - foe_hp, 0), totalTime)
+  removeOldDamageFrames()
+  
+  ?damage_on_frame［0］.Count() > 1 & visible
+    >`0,@screen.h-2@,DPS: 
+    ^@RoundToDecimals(getDamageAverage(),1)@ (ignores armor)
+  
+  foe_prev_hp = foe_hp
+
+func RoundToDecimals(num, decimals)
+  var rounded = num
+  var ten_pow = math.Pow(10, decimals)
+  rounded*=ten_pow
+  rounded = math.Round(rounded)/ten_pow
+  return rounded
+  
+
+func getDamageAverage()
+  var arrayCount = damage_on_frame［0］.Count()
+  var averageDmg = 0.0
+  averageDmg = 0.0
+  for i = 0..arrayCount-1
+    averageDmg += damage_on_frame［0］［i］
+  averageDmg/=arrayCount
+  averageDmg*=FPS
+  return averageDmg
+
+func addDamageFrame(damage, frame)
+  ?damage_on_frame［1］［0］ > 0
+    damage_on_frame［0］.Add(damage)
+    damage_on_frame［1］.Add(frame)
+  :
+    damage_on_frame［0］.Emplace(0,damage)
+    damage_on_frame［1］.Emplace(0,frame)
+  
+func removeOldDamageFrames()
+  var arrayCount = damage_on_frame［0］.Count()
+  ?totTime - damage_on_frame［1］［0］ >= FPS*MAX_RECORDED_SECONDS
+    damage_on_frame［0］.RemoveAt(0)
+    damage_on_frame［1］.RemoveAt(0)

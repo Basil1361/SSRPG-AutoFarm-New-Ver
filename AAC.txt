@@ -1,0 +1,28 @@
+func isEquippedTwoHanded()
+  return !item.left
+
+func CheckForAAC()
+  ?!ai.enabled
+    return
+
+  var isTwoHanded = isEquippedTwoHanded()
+  var leftItem = item.left
+  var rightItem = item.right
+  
+  ?item.right.state = 3
+    equipR shield *0 +0
+  ?item.left.state = 3
+    equipL wand *0 +0
+  
+  ?isTwoHanded
+    ?rightItem
+      equip @rightItem@
+    :?leftItem
+      equip @leftItem@
+  :
+    ?rightItem
+      equipR @rightItem@
+    ?leftItem
+      equipL @leftItem@
+
+CheckForAAC()

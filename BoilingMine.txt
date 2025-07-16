@@ -1,0 +1,77 @@
+func BoilingMineBlueLvl5()
+  ? loc = Boiling Mine   
+    ? summon.count = 0 & foe.count = 0
+    ^& item.GetCooldown(＂cinderwisp＂) <= 0
+    ^& item.CanActivate()
+      equipL fire_talisman
+      activate L
+
+    :? foe.count >= 0 
+    ^& pickup.distance <= 10
+      equipL Star
+      equipR Tri
+
+    :? foe = Mine Walker  | foe = Dominotaur
+    ^| foe = fire elemental | foe = Flame Geyser
+    ^| foe = Whip Controller 
+      ? foe.count > 15
+      ^&item.GetCooldown(＂blade＂) <= 0
+        equip blade 
+        activate blade
+      ? foe.distance <= 25
+        equip repeating
+
+      /* ? foe.count > 0 & foe.distance <= 35
+        activate potion */
+      :
+        equip Compound Shield
+        equipL tri
+
+   :? foe = ＂Bomb Cart＂ & foe.distance <= 25
+     equip repeating crossbow
+     ? foe.distance <= 10
+     ^&item.GetCooldown(＂mind＂) <= 0
+       equipL mind Stone
+
+   :? foe = ＂Bronze Guardian＂
+
+    /* ? summon.GetId() = cinderwisp &
+     ^summon.GetVar(＂ignition＂) >= 6
+       activate cinderwisp */
+
+     ?foe.state = 2 | foe.state = 1 
+       equip repeating crossbow
+
+     :? foe.state = 33 & foe.time >= 150
+       equip repeating crossbow
+
+
+     :?foe.state = 32
+       ^&item.GetCooldown(＂mind＂) <= 0 
+       ^&foe.time >= 17
+         equipL mind Stone
+         equipR tri
+
+     :?foe.state = 33
+       ?foe.distance >= 7
+         equipL tri
+         equip dashing shield
+       :?item.GetCooldown(＂mask＂) <= 0 
+         equipR mask
+         activate mask
+       :?item.GetCooldown(＂bardiche＂)  <= 0 
+       ^|(item.right = ＂bardiche＂
+       ^& item.right.state = 2)
+         equip bardiche
+         activate R
+       :? hp < maxhp
+         equipL fire sword
+         equipR sword vigor 
+        
+       :
+         equip repeating
+    : 
+      equip Compound Shield
+      equipL tri
+
+BoilingMineBlueLvl5()

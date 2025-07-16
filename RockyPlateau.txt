@@ -1,0 +1,116 @@
+func RockyGoldLvl1()
+  ? loc = Rocky  
+    ? hp < 7
+      activate potion
+    ? summon.count = 0 & foe.count = 0
+    ^& item.GetCooldown(＂cinderwisp＂) <= 0
+    ^& item.CanActivate()
+      equipL fire_talisman
+      activate L
+
+    :? foe.count >= 0 
+    ^& pickup.distance <= 10
+      equipL Star
+      equipR Tri
+
+    :? foe = ＂Acronian Scout＂
+      ?foe.distance >= 7
+         equipL tri
+         equip dashing shield
+      :?item.GetCooldown(＂mask＂) <= 0 
+        equipR mask
+        activate mask
+     :?item.GetCooldown(＂bardiche＂)  <= 0 
+     ^|(item.right = ＂bardiche＂
+     ^& item.right.state = 2)
+       equip bardiche
+       activate R
+     :
+       equipL vigor sword
+       equipR Poison Hammer      
+
+    :? foe = ＂phase1＂
+      ?foe.distance >= 7
+         equipL tri
+         equip dashing shield
+      :?item.GetCooldown(＂mask＂) <= 0 
+        equipR mask
+        activate mask
+     :?item.GetCooldown(＂bardiche＂)  <= 0 
+     ^|(item.right = ＂bardiche＂
+     ^& item.right.state = 2)
+       equip bardiche
+       activate R
+     :
+       equipL vigor sword
+       equipR fire sword
+
+    :? foe = ＂phase2＂
+      ?foe.distance >= 7
+         equip dashing shield
+      :?item.GetCooldown(＂mask＂) <= 0 
+         equipR mask
+         activate mask
+     :?item.GetCooldown(＂bardiche＂)  <= 0 
+     ^|(item.right = ＂bardiche＂
+     ^& item.right.state = 2)
+       equip bardiche
+       activate R
+
+      :?foe = ＂fire＂
+          equipR Ether Wand
+          equipL Vigor Sword
+      :?foe = ＂ether＂
+          equipL Vigor Sword
+          equipR Vigor wand
+      :?foe = ＂ice＂
+          equipL Vigor Sword
+          equipR Fire Sword
+      :?foe = ＂vigor＂
+          equipL vigor sword
+          equipR Poison hammer
+      :?foe = ＂poison＂
+          equip Ice Crossbow
+
+    :? foe = ＂phase3＂
+      ?foe.distance >= 10
+        equipL Star
+        equipR Vigor
+
+     :? foe.state >= 115
+      ^& foe.time >= 15
+      ^&item.GetCooldown(＂mind＂) <= 0 
+        equipL mind Stone
+        equipR tri
+
+     :? foe.damage = 1 & foe.state = 32
+     ^& foe.time >= 27
+       equipL mind Stone
+       equipR tri
+
+      :? foe.buffs.string = ＂fire＂
+        equipR vigor sword
+        equipL poison hammer 
+
+      :? foe.buffs.string = ＂vigor＂
+        ? hp = maxhp
+          equipR vigor sword
+          equipL fire sword
+        : 
+          equipR vigor sword
+          equipL fire sword
+     :
+       equipL vigor sword 
+       equipR fire sword
+
+    :
+      equipL Tri
+      equip Compound Shield
+
+/*
+    ? harvest.distance < 5
+      equip shovel
+      activate shovel 
+*/
+
+RockyGoldLvl1()
