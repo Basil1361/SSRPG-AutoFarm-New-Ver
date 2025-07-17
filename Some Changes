@@ -1,0 +1,7 @@
+1. Boiling Mine
+
+:? foe = ＂Bomb Cart＂ & foe.distance <= 25
+     equip repeating crossbow
+     ? foe.distance <= 10
+     ^&item.GetCooldown(＂mind＂) <= 0
+       equipL mind Stone
