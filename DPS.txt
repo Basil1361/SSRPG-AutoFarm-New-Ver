@@ -1,3 +1,6 @@
+Code from: 
+@Bitty45
+
 var FPS = 30
 var MAX_RECORDED_SECONDS = 2
 var foe_prev_hp = 0
